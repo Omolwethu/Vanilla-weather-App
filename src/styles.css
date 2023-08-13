@@ -1,0 +1,78 @@
+body {
+  font-family: "Poppins", sans-serif;
+  color: rgb(139, 147, 147);
+}
+
+h1 {
+  line-height: 28px;
+  margin-bottom: 0;
+  font-size: 30px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 25px;
+}
+.weather-app-wrapper {
+  margin: 30px auto;
+  max-width: 550px;
+}
+
+.weather-app {
+  padding: 20px;
+  border: 2px solid rgb(139, 147, 147);
+  background: radial-gradient(
+    253px at 12.6% 77.9%,
+    rgb(221, 255, 214) 0.3%,
+    rgb(214, 254, 254) 90.5%
+  );
+}
+
+.info {
+  margin-top: 20px;
+}
+
+.weather-temp strong {
+  font-size: 55px;
+  line-height: 1;
+  margin-left: 15px;
+}
+
+.weather-temp img {
+  margin-left: 155px;
+  height: 95px;
+  width: 95px;
+}
+
+.weather-temp .units {
+  position: relative;
+  top: -30px;
+}
+
+.climate {
+  position: relative;
+  bottom: -95px;
+}
+
+.btn {
+  background-color: rgb(139, 147, 147);
+  border-color: rgb(139, 147, 147);
+}
+
+.weather-temp .active {
+  color: rgb(139, 147, 147);
+  cursor: default;
+}
+
+.weather-temp .active:hover {
+  text-decoration: none;
+}
