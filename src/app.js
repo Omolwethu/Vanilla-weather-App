@@ -28,13 +28,22 @@ function formateDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "e7c4beb42e3f6484a104d6dto8e6b7b8";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
+
   let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtTML = `<div class="row">`;
   days.forEach(function (day) {
-    forecastHtTML =
-      forecastHtTML +
+    forecastHTML =
+      forecastHTML +
       `
     <div class="col-2">
       <div class="weather-forecast-date">
@@ -52,9 +61,8 @@ function displayForecast() {
    
   `;
   });
-  forecastElement.innerHTML = forecastHtTML + `</div`;
-  forecastElement.innerHTML = forecastHtTML;
-  console.log(forecastHtTML);
+  forecastElement.innerHTML = forecastHTML + `</div`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function displayTemperature(response) {
@@ -79,6 +87,8 @@ function displayTemperature(response) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
   humidityElement.innerHTML = response.data.temperature.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
+
+  getForecast(response.data.coordinates);
 }
 
 function handleSubmit(event) {
@@ -115,4 +125,3 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 search("Tokyo");
-displayForecast();
