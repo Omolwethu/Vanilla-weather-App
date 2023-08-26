@@ -32,7 +32,6 @@ function getForecast(coordinates) {
   console.log(coordinates);
   let key = "e7c4beb42e3f6484a104d6dto8e6b7b8";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${key}&units=metric`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 function formatDay(timestamp) {
@@ -104,8 +103,6 @@ function displayTemperature(response) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
   humidityElement.innerHTML = response.data.temperature.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
-
-  console.log(response.data);
 
   getForecast(response.data.coordinates);
 }
