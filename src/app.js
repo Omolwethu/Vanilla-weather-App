@@ -31,7 +31,7 @@ function formateDate(timestamp) {
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "e7c4beb42e3f6484a104d6dto8e6b7b8";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
