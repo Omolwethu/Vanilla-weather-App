@@ -30,38 +30,55 @@ function formateDate(timestamp) {
 
 function getForecast(coordinates) {
   console.log(coordinates);
-  let apiKey = "e7c4beb42e3f6484a104d6dto8e6b7b8";
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
+  let key = "e7c4beb42e3f6484a104d6dto8e6b7b8";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${key}&units=metric`;
+  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
+}
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
 }
 
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
-  let forecastHtTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML = 
-      forecastHTML +
-      `
-    <div class="col-2">
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+        <div class="col-2">
       <div class="weather-forecast-date">
-        ${day} </div>
+        ${formatDay(forecastDay.time)} </div>
         <img
-          src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+        class= "tempImg"
+          src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+            forecastDay.condition.icon
+          }.png" 
           alt=""
           width="40"
         />
         <div class="weather-forecast-temps">
-          <span class="weather-forecast-temp-max">30°</span> |
-          <span class="weather-forecast-temp-min">5° </span>
+          <span class="weather-forecast-temp-max">${Math.round(
+            forecastDay.temperature.maximum
+          )}°</span> |
+          <span class="weather-forecast-temp-min">${Math.round(
+            forecastDay.temperature.minimum
+          )}° </span>
         </div>
       </div>
    
   `;
+    }
   });
-  forecastElement.innerHTML = forecastHTML + `</div`;
+  forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
 
@@ -87,6 +104,8 @@ function displayTemperature(response) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
   humidityElement.innerHTML = response.data.temperature.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
+
+  console.log(response.data);
 
   getForecast(response.data.coordinates);
 }
