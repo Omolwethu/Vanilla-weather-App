@@ -28,6 +28,35 @@ function formateDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHtTML =
+      forecastHtTML +
+      `
+    <div class="col-2">
+      <div class="weather-forecast-date">
+        ${day} </div>
+        <img
+          src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-day.png"
+          alt=""
+          width="40"
+        />
+        <div class="weather-forecast-temps">
+          <span class="weather-forecast-temp-max">30°</span> |
+          <span class="weather-forecast-temp-min">5° </span>
+        </div>
+      </div>
+   
+  `;
+  });
+  forecastElement.innerHTML = forecastHtTML + `</div`;
+  forecastElement.innerHTML = forecastHtTML;
+  console.log(forecastHtTML);
+}
+
 function displayTemperature(response) {
   let cityElement = document.querySelector("#city");
   let dateElement = document.querySelector("#date");
@@ -86,3 +115,4 @@ let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 search("Tokyo");
+displayForecast();
