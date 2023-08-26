@@ -29,11 +29,11 @@ li {
 
 .weather-app {
   padding: 20px;
-  border: 2px solid rgb(139, 147, 147);
+  border: 2px solid #d3d6db;
   background: radial-gradient(
-    253px at 12.6% 77.9%,
-    rgb(221, 255, 214) 0.3%,
-    rgb(214, 254, 254) 90.5%
+    circle at 10% 20%,
+    rgb(255, 252, 214) 0%,
+    rgba(255, 102, 102, 0.44) 90%
   );
 }
 
