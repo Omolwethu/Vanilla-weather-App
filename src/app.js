@@ -37,7 +37,7 @@ function getForecast(coordinates) {
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
-  let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+  let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   return days[day];
 }
